@@ -35,7 +35,7 @@ export class Usuario extends Entity {
 
   @property({
     type: 'string',
-    required: true,
+    required: false,
   })
   clave: string;
 
@@ -46,10 +46,10 @@ export class Usuario extends Entity {
   rol: string;
 
   @property({
-    type: 'number',
+    type: 'string',
     required: true,
   })
-  permiso: number;
+  permiso: string;
 
 
   constructor(data?: Partial<Usuario>) {
