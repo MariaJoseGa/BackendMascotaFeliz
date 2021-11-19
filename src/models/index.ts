@@ -9,3 +9,4 @@ export * from './detalle-pedido.model';
 export * from './consulta-veterinaria.model';
 export * from './mascota.model';
 export * from './pago-planes.model';
+export * from './credenciales.model';

@@ -5,19 +5,14 @@ import {
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
-  put,
-  del,
-  requestBody,
-  response,
+  del, get,
+  getModelSchemaRef, param, patch, post, put, requestBody,
+  response
 } from '@loopback/rest';
+import {Llaves} from '../config/llaves';
 import {Empleado} from '../models';
 import {EmpleadoRepository} from '../repositories';
 import {AutenticacionService} from '../services';
@@ -26,10 +21,10 @@ const fetch = require("node-fetch");
 export class EmpleadoController {
   constructor(
     @repository(EmpleadoRepository)
-    public empleadoRepository : EmpleadoRepository,
+    public empleadoRepository: EmpleadoRepository,
     @service(AutenticacionService)
     public servicioAutenticacion: AutenticacionService
-  ) {}
+  ) { }
 
   @post('/empleados')
   @response(200, {
@@ -57,11 +52,11 @@ export class EmpleadoController {
     //Notificar al usuario
     let destino = empleado.email;
     let asunto = '¡Registro en MASCOTA FELIZ exitoso!';
-    let contenido = `Hola ${empleado.nombre}, su usario es ${empleado.email} y su contraseña es ${clave}`;
-    fetch(`http://127.0.0.1:5000/envio-correo?correo-destino=${destino}&asunto=${asunto}&contenido=${contenido}`)
-    .then((data:any)=>{
-      console.log(data);
-    })
+    let contenido = `Hola ${empleado.nombre}, su usuario es ${empleado.email} y su contraseña es ${clave}`;
+    fetch(`${Llaves.urlServicioNotificaciones}/envio-correo?correo-destino=${destino}&asunto=${asunto}&contenido=${contenido}`)
+      .then((data: any) => {
+        console.log(data);
+      })
     return e;
   }
 

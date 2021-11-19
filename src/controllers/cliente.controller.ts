@@ -5,20 +5,15 @@ import {
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
-  put,
-  del,
-  requestBody,
-  response,
+  del, get,
+  getModelSchemaRef, HttpErrors, param, patch, post, put, requestBody,
+  response
 } from '@loopback/rest';
-import {Cliente} from '../models';
+import {Llaves} from '../config/llaves';
+import {Cliente, Credenciales} from '../models';
 import {ClienteRepository} from '../repositories';
 import {AutenticacionService} from '../services';
 const fetch = require("node-fetch");
@@ -26,10 +21,38 @@ const fetch = require("node-fetch");
 export class ClienteController {
   constructor(
     @repository(ClienteRepository)
-    public clienteRepository : ClienteRepository,
+    public clienteRepository: ClienteRepository,
     @service(AutenticacionService)
     public servicioAutenticacion: AutenticacionService
-  ) {}
+  ) { }
+
+  @post('/identificarPersona', {
+    responses: {
+      '200': {
+        description: 'Identificacion de usuarios'
+      }
+    }
+  })
+  async identificarPersona(
+    @requestBody() credenciales: Credenciales
+  ) {
+    let p = await this.servicioAutenticacion.IdentificarPersona(credenciales.usuario, credenciales.clave);
+    if (p) {
+      let token = this.servicioAutenticacion.GenerarTokenJWT(p);
+      return {
+        datos: {
+          nombres: p.nombre + " " + p.apellidos,
+          correo: p.email,
+          id: p.id
+        },
+        tk: token
+      }
+    }
+    else {
+      throw new HttpErrors[401]("Datos invalidos");
+    }
+  }
+
 
   @post('/clientes')
   @response(200, {
@@ -52,16 +75,16 @@ export class ClienteController {
     let clave = this.servicioAutenticacion.GenerarClave();
     let claveCifrada = this.servicioAutenticacion.CifrarClave(clave);
     cliente.clave = claveCifrada;
-    let c= await this.clienteRepository.create(cliente);
+    let c = await this.clienteRepository.create(cliente);
 
     //Notificar al usuario
     let destino = cliente.email;
     let asunto = '¡Registro en MASCOTA FELIZ exitoso!';
-    let contenido = `Hola ${cliente.nombre}, su usario es ${cliente.email} y su contraseña es ${clave}`;
-    fetch(`http://127.0.0.1:5000/envio-correo?correo-destino=${destino}&asunto=${asunto}&contenido=${contenido}`)
-    .then((data:any)=>{
-      console.log(data);
-    })
+    let contenido = `Hola ${cliente.nombre}, su usuario es ${cliente.email} y su contraseña es ${clave}`;
+    fetch(`${Llaves.urlServicioNotificaciones}/envio-correo?correo-destino=${destino}&asunto=${asunto}&contenido=${contenido}`)
+      .then((data: any) => {
+        console.log(data);
+      })
     return c;
   }
 
