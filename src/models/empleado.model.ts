@@ -49,10 +49,10 @@ export class Empleado extends Entity {
   ciudad: string;
 
   @property({
-    type: 'number',
+    type: 'string',
     required: true,
   })
-  tipo: number;
+  tipo: string;
 
   @hasMany(() => Mascota)
   mascotas: Mascota[];

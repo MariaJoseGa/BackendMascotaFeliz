@@ -1,21 +1,16 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
-  put,
-  del,
-  requestBody,
-  response,
+  del, get,
+  getModelSchemaRef, param, patch, post, put, requestBody,
+  response
 } from '@loopback/rest';
 import {Mascota} from '../models';
 import {MascotaRepository} from '../repositories';
@@ -23,9 +18,10 @@ import {MascotaRepository} from '../repositories';
 export class MascotaController {
   constructor(
     @repository(MascotaRepository)
-    public mascotaRepository : MascotaRepository,
-  ) {}
+    public mascotaRepository: MascotaRepository,
+  ) { }
 
+  @authenticate("admin")
   @post('/mascotas')
   @response(200, {
     description: 'Mascota model instance',

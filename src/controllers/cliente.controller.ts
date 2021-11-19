@@ -43,7 +43,8 @@ export class ClienteController {
         datos: {
           nombres: p.nombre + " " + p.apellidos,
           correo: p.email,
-          id: p.id
+          id: p.id,
+          rol: p.rol
         },
         tk: token
       }

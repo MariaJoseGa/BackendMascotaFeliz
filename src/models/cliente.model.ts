@@ -48,6 +48,13 @@ export class Cliente extends Entity {
   })
   ciudad: string;
 
+  @property({
+    type: 'string',
+    required: true,
+  })
+  rol: string;
+
+
   @hasMany(() => Pedido)
   pedidos: Pedido[];
 

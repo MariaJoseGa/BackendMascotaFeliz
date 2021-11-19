@@ -1,8 +1,8 @@
-import {Entity, model, property, belongsTo, hasMany} from '@loopback/repository';
-import {Empleado} from './empleado.model';
+import {belongsTo, Entity, hasMany, model, property} from '@loopback/repository';
 import {Cliente} from './cliente.model';
-import {PagoPlanes} from './pago-planes.model';
 import {ConsultaVeterinaria} from './consulta-veterinaria.model';
+import {Empleado} from './empleado.model';
+import {PagoPlanes} from './pago-planes.model';
 
 @model()
 export class Mascota extends Entity {
@@ -20,10 +20,10 @@ export class Mascota extends Entity {
   nombre: string;
 
   @property({
-    type: 'number',
+    type: 'string',
     required: true,
   })
-  estado: number;
+  estado: string;
 
   @property({
     type: 'string',
