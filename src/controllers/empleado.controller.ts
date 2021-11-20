@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {service} from '@loopback/core';
 import {
   Count,
@@ -9,11 +10,11 @@ import {
 } from '@loopback/repository';
 import {
   del, get,
-  getModelSchemaRef, param, patch, post, put, requestBody,
+  getModelSchemaRef, HttpErrors, param, patch, post, put, requestBody,
   response
 } from '@loopback/rest';
 import {Llaves} from '../config/llaves';
-import {Empleado} from '../models';
+import {Empleado, Credenciales} from '../models';
 import {EmpleadoRepository} from '../repositories';
 import {AutenticacionService} from '../services';
 const fetch = require("node-fetch");
@@ -25,6 +26,34 @@ export class EmpleadoController {
     @service(AutenticacionService)
     public servicioAutenticacion: AutenticacionService
   ) { }
+
+  @post('/identificarEmpleado', {
+    responses: {
+      '200': {
+        description: 'Identificacion de usuarios'
+      }
+    }
+  })
+  async identificarEmpleado(
+    @requestBody() credenciales: Credenciales
+  ) {
+    let e = await this.servicioAutenticacion.IdentificarEmpleado(credenciales.usuario, credenciales.clave);
+    if (e) {
+      let token = this.servicioAutenticacion.GenerarTokenJWTEmpleado(e);
+      return {
+        datos: {
+          nombres: e.nombre + " " + e.apellidos,
+          correo: e.email,
+          id: e.id,
+          rol: e.tipo
+        },
+        tk: token
+      }
+    }
+    else {
+      throw new HttpErrors[401]("Datos invalidos");
+    }
+  }
 
   @post('/empleados')
   @response(200, {

@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -26,6 +27,7 @@ export class PlanController {
     public planRepository : PlanRepository,
   ) {}
 
+  @authenticate("empleado")
   @post('/planes')
   @response(200, {
     description: 'Plan model instance',

@@ -3,6 +3,8 @@ import {repository} from '@loopback/repository';
 import {Llaves} from '../config/llaves';
 import {Cliente} from '../models';
 import {ClienteRepository} from '../repositories';
+import {Empleado} from '../models';
+import {EmpleadoRepository} from '../repositories';
 const generador = require("password-generator");
 const cryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
@@ -10,7 +12,9 @@ const jwt = require("jsonwebtoken");
 export class AutenticacionService {
   constructor(
     @repository(ClienteRepository)
-    public ClienteRepository: ClienteRepository
+    public ClienteRepository: ClienteRepository,
+    @repository(EmpleadoRepository)
+    public EmpleadoRepository: EmpleadoRepository
 
   ) { }
 
@@ -36,6 +40,19 @@ export class AutenticacionService {
     }
   }
 
+  IdentificarEmpleado(correo: string, clave: string) {
+    try {
+      let e = this.EmpleadoRepository.findOne({where: {email: correo, clave: clave}});
+      if (e) {
+        return e;
+      }
+      return false;
+    }
+    catch {
+      return false;
+    }
+  }
+
   GenerarTokenJWT(cliente: Cliente) {
     let token = jwt.sign({
       data: {
@@ -43,6 +60,19 @@ export class AutenticacionService {
         correo: cliente.email,
         nombres: cliente.nombre + " " + cliente.apellidos,
         rol: cliente.rol
+      }
+    },
+      Llaves.claveJWT);
+    return token;
+  }
+
+  GenerarTokenJWTEmpleado(empleado: Empleado) {
+    let token = jwt.sign({
+      data: {
+        id: empleado.id,
+        correo: empleado.email,
+        nombres: empleado.nombre + " " + empleado.apellidos,
+        rol: empleado.tipo
       }
     },
       Llaves.claveJWT);
