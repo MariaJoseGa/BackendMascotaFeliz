@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -26,6 +27,7 @@ export class ConsultaVeterinariaController {
     public consultaVeterinariaRepository : ConsultaVeterinariaRepository,
   ) {}
 
+  @authenticate("empleado")
   @post('/consulta-veterinarias')
   @response(200, {
     description: 'ConsultaVeterinaria model instance',

@@ -35,6 +35,12 @@ export class Producto extends Entity {
   })
   precioVenta: number;
 
+  @property({
+    type: 'string',
+    required: true,
+  })
+  imagen: string;
+
   @belongsTo(() => Proveedor)
   proveedorId: string;
 

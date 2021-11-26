@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -26,6 +27,7 @@ export class PedidoController {
     public pedidoRepository : PedidoRepository,
   ) {}
 
+  @authenticate("admin")
   @post('/pedidos')
   @response(200, {
     description: 'Pedido model instance',
@@ -47,6 +49,7 @@ export class PedidoController {
     return this.pedidoRepository.create(pedido);
   }
 
+  @authenticate.skip()
   @get('/pedidos/count')
   @response(200, {
     description: 'Pedido model count',

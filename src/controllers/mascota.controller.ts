@@ -43,6 +43,7 @@ export class MascotaController {
     return this.mascotaRepository.create(mascota);
   }
 
+  @authenticate.skip()
   @get('/mascotas/count')
   @response(200, {
     description: 'Mascota model count',

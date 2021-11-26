@@ -30,3 +30,8 @@ export * from './detalle-pedido.controller';
 export * from './consulta-veterinaria.controller';
 export * from './mascota.controller';
 export * from './pago-planes.controller';
+export * from './solicitud-afiliacion.controller';
+export * from './solicitud-afiliacion-mascota.controller';
+export * from './solicitud-afiliacion-cliente.controller';
+export * from './cliente-solicitud-afiliacion.controller';
+export * from './mascota-solicitud-afiliacion.controller';

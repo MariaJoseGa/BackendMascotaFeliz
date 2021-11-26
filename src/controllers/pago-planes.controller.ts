@@ -27,6 +27,7 @@ export class PagoPlanesController {
     public pagoPlanesRepository : PagoPlanesRepository,
   ) {}
 
+  @authenticate("admin")
   @post('/pago-planes')
   @response(200, {
     description: 'PagoPlanes model instance',
