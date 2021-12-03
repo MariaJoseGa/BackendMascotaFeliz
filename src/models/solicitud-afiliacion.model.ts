@@ -5,16 +5,22 @@ import {Cliente} from './cliente.model';
 @model()
 export class SolicitudAfiliacion extends Entity {
   @property({
-    type: 'date',
+    type: 'string',
     required: true,
   })
-  FechaSolicitud: string;
+  petName: string;
 
   @property({
     type: 'string',
     required: true,
   })
-  EstadoAfiliacion: string;
+  estado: string;
+
+  @property({
+    type: 'string',
+    required: true,
+  })
+  comentario: string;
 
   @property({
     type: 'string',

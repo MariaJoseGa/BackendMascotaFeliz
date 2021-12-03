@@ -56,6 +56,12 @@ export class Mascota extends Entity {
   })
   imagen: string;
 
+  @property({
+    type: 'string',
+    required: true,
+  })
+  fechaSolicitud: string;
+
   @belongsTo(() => Empleado)
   empleadoId: string;
 
