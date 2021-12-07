@@ -1,4 +1,3 @@
-import {authenticate} from '@loopback/authentication';
 import {service} from '@loopback/core';
 import {
   Count,
@@ -14,7 +13,7 @@ import {
   response
 } from '@loopback/rest';
 import {Llaves} from '../config/llaves';
-import {Empleado, Credenciales} from '../models';
+import {Credenciales, Empleado} from '../models';
 import {EmpleadoRepository} from '../repositories';
 import {AutenticacionService} from '../services';
 const fetch = require("node-fetch");
@@ -81,7 +80,7 @@ export class EmpleadoController {
     //Notificar al usuario
     let destino = empleado.email;
     let asunto = '¡Registro en MASCOTA FELIZ exitoso!';
-    let contenido = `Hola ${empleado.nombre}, su usuario es ${empleado.email} y su contraseña es ${clave}`;
+    let contenido = `Hola Asesor: ${empleado.nombre}, BIENVENIDO A LA FAMILIA DE MASCOTA FELIZ, su usuario es ${empleado.email} y su contraseña es ${clave}`;
     fetch(`${Llaves.urlServicioNotificaciones}/envio-correo?correo-destino=${destino}&asunto=${asunto}&contenido=${contenido}`)
       .then((data: any) => {
         console.log(data);
