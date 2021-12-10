@@ -27,7 +27,10 @@ export class ConsultaVeterinariaController {
     public consultaVeterinariaRepository : ConsultaVeterinariaRepository,
   ) {}
 
+  //Metodo de autenticacion para llamar a la estrategia de empleado
   @authenticate("empleado")
+
+  
   @post('/consulta-veterinarias')
   @response(200, {
     description: 'ConsultaVeterinaria model instance',

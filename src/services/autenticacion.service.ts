@@ -17,16 +17,17 @@ export class AutenticacionService {
     public EmpleadoRepository: EmpleadoRepository
 
   ) { }
-
+  //Metodo para la generacion aleatoria de claves
   GenerarClave() {
     let clave = generador(8, false);
     return clave;
   }
+  //Cifrado de claves
   CifrarClave(clave: string) {
     let claveCifrada = cryptoJS.MD5(clave).toString();
     return claveCifrada;
   }
-
+  //Cogigo para la autenticacion e identificacion del usuario cliente
   IdentificarPersona(correo: string, clave: string) {
     try {
       let p = this.ClienteRepository.findOne({where: {email: correo, clave: clave}});
@@ -39,7 +40,7 @@ export class AutenticacionService {
       return false;
     }
   }
-
+//Cogigo para la autenticacion e identificacion del usuarios empleado
   IdentificarEmpleado(correo: string, clave: string) {
     try {
       let e = this.EmpleadoRepository.findOne({where: {email: correo, clave: clave}});
@@ -52,7 +53,7 @@ export class AutenticacionService {
       return false;
     }
   }
-
+// Codigo para generacion de Token para cliente
   GenerarTokenJWT(cliente: Cliente) {
     let token = jwt.sign({
       data: {
@@ -66,6 +67,7 @@ export class AutenticacionService {
     return token;
   }
 
+  // Codigo para generacion de Token para empleado
   GenerarTokenJWTEmpleado(empleado: Empleado) {
     let token = jwt.sign({
       data: {
@@ -79,6 +81,8 @@ export class AutenticacionService {
     return token;
   }
 
+
+  //Validacion de Token
   ValidarTokenJWT(token: string) {
     try {
       let datos = jwt.verify(token, Llaves.claveJWT);

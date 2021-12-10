@@ -43,7 +43,7 @@ export class App extends BootMixin(
         nested: true,
       },
     };
-
+    //Se agrega el registro de autenticacion de estrategia de administrador y empleado
     registerAuthenticationStrategy(this, EstrategiaAdministrador);
     registerAuthenticationStrategy(this, EstrategiaEmpleado);
     this.component(AuthenticationComponent);

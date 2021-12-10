@@ -5,18 +5,12 @@ import {
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
-  put,
-  del,
-  requestBody,
-  response,
+  del, get,
+  getModelSchemaRef, param, patch, post, put, requestBody,
+  response
 } from '@loopback/rest';
 import {Usuario} from '../models';
 import {UsuarioRepository} from '../repositories';
@@ -26,10 +20,11 @@ const fetch = require("node-fetch");
 export class UsuarioController {
   constructor(
     @repository(UsuarioRepository)
-    public usuarioRepository : UsuarioRepository,
+    public usuarioRepository: UsuarioRepository,
+    //Importacion del servicio de autenticacion
     @service(AutenticacionService)
     public servicioAutenticacion: AutenticacionService
-  ) {}
+  ) { }
 
   @post('/usuarios')
   @response(200, {
@@ -49,19 +44,20 @@ export class UsuarioController {
     })
     usuario: Omit<Usuario, 'id'>,
   ): Promise<Usuario> {
+    //Generacion y cifrado de clave
     let clave = this.servicioAutenticacion.GenerarClave();
     let claveCifrada = this.servicioAutenticacion.CifrarClave(clave);
     usuario.clave = claveCifrada;
     let u = await this.usuarioRepository.create(usuario);
 
-    //Notificar al usuario
+    //Notificar al usuario su registro
     let destino = usuario.email;
     let asunto = '¡Registro en MASCOTA FELIZ exitoso!';
     let contenido = `Hola ${usuario.nombre}, su usario es ${usuario.email} y su contraseña es ${clave}`;
     fetch(`http://127.0.0.1:5000/envio-correo?correo-destino=${destino}&asunto=${asunto}&contenido=${contenido}`)
-    .then((data:any)=>{
-      console.log(data);
-    })
+      .then((data: any) => {
+        console.log(data);
+      })
     return u;
   }
 

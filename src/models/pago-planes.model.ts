@@ -2,6 +2,7 @@ import {Entity, model, property, belongsTo} from '@loopback/repository';
 import {Plan} from './plan.model';
 import {Mascota} from './mascota.model';
 
+//Se genera el modelo pago-planes y sus respectivas propiedades
 @model()
 export class PagoPlanes extends Entity {
   @property({
@@ -35,6 +36,7 @@ export class PagoPlanes extends Entity {
   })
   observaciones: string;
 
+ //Se crea las diferentes relaciones del moldelo pago-planes con otros modelos
   @belongsTo(() => Plan)
   planId: string;
 

@@ -22,10 +22,12 @@ export class ClienteController {
   constructor(
     @repository(ClienteRepository)
     public clienteRepository: ClienteRepository,
+    //Importacion de servicio de autenticacion 
     @service(AutenticacionService)
     public servicioAutenticacion: AutenticacionService
   ) { }
 
+  //Creacion de metodo de identificacion del usuario cliente
   @post('/identificarPersona', {
     responses: {
       '200': {
@@ -36,6 +38,7 @@ export class ClienteController {
   async identificarPersona(
     @requestBody() credenciales: Credenciales
   ) {
+    //Generacion de autenticacion y token para el cliente
     let p = await this.servicioAutenticacion.IdentificarPersona(credenciales.usuario, credenciales.clave);
     if (p) {
       let token = this.servicioAutenticacion.GenerarTokenJWT(p);
@@ -73,12 +76,13 @@ export class ClienteController {
     })
     cliente: Omit<Cliente, 'id'>,
   ): Promise<Cliente> {
+    //Generacion automatica y cifrado de clave
     let clave = this.servicioAutenticacion.GenerarClave();
     let claveCifrada = this.servicioAutenticacion.CifrarClave(clave);
     cliente.clave = claveCifrada;
     let c = await this.clienteRepository.create(cliente);
 
-    //Notificar al usuario
+    //Notificar al usuario su registro
     let destino = cliente.email;
     let asunto = '¡Registro en MASCOTA FELIZ exitoso!';
     let contenido = `Hola ${cliente.nombre}, su usuario es ${cliente.email} y su contraseña es ${clave}`;

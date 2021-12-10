@@ -5,6 +5,7 @@ import {UserProfile} from '@loopback/security';
 import parseBearerToken from 'parse-bearer-token';
 import {AutenticacionService} from '../services';
 
+//Codigo de implementacion de la estrategia para identificar al usuario-Administrador
 export class EstrategiaAdministrador implements AuthenticationStrategy {
   name: string = 'admin';
 
@@ -13,6 +14,7 @@ export class EstrategiaAdministrador implements AuthenticationStrategy {
     public servicioAutenticacion: AutenticacionService
   ) { }
 
+  //Metodo de autenticacion para ejecutar la estrategia de administrador
   async authenticate(request: Request): Promise<UserProfile | undefined> {
     let token = parseBearerToken(request)
     if (token) {

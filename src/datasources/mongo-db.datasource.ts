@@ -4,6 +4,7 @@ import {juggler} from '@loopback/repository';
 const config = {
   name: 'mongoDB',
   connector: 'mongodb',
+  //Se agrega la cadena de conexion al mongodb
   url: 'mongodb+srv://dbMajo:majogafra@cluster0.crsgv.mongodb.net/mascotaFelizBD?retryWrites=true&w=majority',
   host: '',
   port: 0,

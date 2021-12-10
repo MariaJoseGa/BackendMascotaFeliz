@@ -5,6 +5,7 @@ import {Empleado} from './empleado.model';
 import {PagoPlanes} from './pago-planes.model';
 import {SolicitudAfiliacion} from './solicitud-afiliacion.model';
 
+//Se genera el modelo mascota con sus propiedades respectivas
 @model()
 export class Mascota extends Entity {
   @property({
@@ -62,6 +63,7 @@ export class Mascota extends Entity {
   })
   fechaSolicitud: string;
 
+  //Se crea las diferentes relaciones del moldelo mascota con otros modelos
   @belongsTo(() => Empleado)
   empleadoId: string;
 

@@ -21,7 +21,9 @@ export class ProductoController {
     public productoRepository: ProductoRepository,
   ) { }
 
+  //Metodo de autenticacion para llamar a la estrategia de empleado
   @authenticate("empleado")
+
   @post('/productos')
   @response(200, {
     description: 'Producto model instance',

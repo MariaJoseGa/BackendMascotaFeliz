@@ -2,6 +2,8 @@ import {belongsTo, Entity, hasMany, model, property} from '@loopback/repository'
 import {DetallePedido} from './detalle-pedido.model';
 import {Proveedor} from './proveedor.model';
 
+//Se genera el modelo producto con sus respectivas propiedades
+
 @model()
 export class Producto extends Entity {
   @property({
@@ -48,7 +50,7 @@ export class Producto extends Entity {
   })
   imagen: string;
 
-
+  //Se crea las diferentes relaciones del moldelo producto con otros modelos
   @belongsTo(() => Proveedor)
   proveedorId: string;
 

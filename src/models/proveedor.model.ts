@@ -2,6 +2,8 @@ import {Entity, model, property, hasMany} from '@loopback/repository';
 import {Producto} from './producto.model';
 import {ConsultaVeterinaria} from './consulta-veterinaria.model';
 
+//Se genera el modelo proveedor y sus respectivas propiedades
+
 @model()
 export class Proveedor extends Entity {
   @property({
@@ -41,6 +43,7 @@ export class Proveedor extends Entity {
   })
   ciudad: string;
 
+ //Se crea las diferentes relaciones del moldelo proveedor con otros modelos
   @hasMany(() => Producto)
   productos: Producto[];
 

@@ -22,6 +22,7 @@ export class EmpleadoController {
   constructor(
     @repository(EmpleadoRepository)
     public empleadoRepository: EmpleadoRepository,
+    //Importacion del servicio de autenticacion
     @service(AutenticacionService)
     public servicioAutenticacion: AutenticacionService
   ) { }
@@ -36,6 +37,7 @@ export class EmpleadoController {
   async identificarEmpleado(
     @requestBody() credenciales: Credenciales
   ) {
+    //Generacion de autenticacion y token para el empleado
     let e = await this.servicioAutenticacion.IdentificarEmpleado(credenciales.usuario, credenciales.clave);
     if (e) {
       let token = this.servicioAutenticacion.GenerarTokenJWTEmpleado(e);
@@ -72,12 +74,13 @@ export class EmpleadoController {
     })
     empleado: Omit<Empleado, 'id'>,
   ): Promise<Empleado> {
+    //Generacion y cifrado de clave
     let clave = this.servicioAutenticacion.GenerarClave();
     let claveCifrada = this.servicioAutenticacion.CifrarClave(clave);
     empleado.clave = claveCifrada;
     let e = await this.empleadoRepository.create(empleado);
 
-    //Notificar al usuario
+    //Notificar al usuario su registro
     let destino = empleado.email;
     let asunto = '¡Registro en MASCOTA FELIZ exitoso!';
     let contenido = `Hola Asesor: ${empleado.nombre}, BIENVENIDO A LA FAMILIA DE MASCOTA FELIZ, su usuario es ${empleado.email} y su contraseña es ${clave}`;

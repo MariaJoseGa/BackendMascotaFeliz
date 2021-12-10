@@ -27,7 +27,9 @@ export class PagoPlanesController {
     public pagoPlanesRepository : PagoPlanesRepository,
   ) {}
 
+  //Metodo de autenticacion para llamar a la estrategia de administracion
   @authenticate("admin")
+  
   @post('/pago-planes')
   @response(200, {
     description: 'PagoPlanes model instance',

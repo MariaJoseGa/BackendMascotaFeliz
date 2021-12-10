@@ -3,6 +3,7 @@ import {Mascota} from './mascota.model';
 import {Pedido} from './pedido.model';
 import {SolicitudAfiliacion} from './solicitud-afiliacion.model';
 
+//Se genera el modelo cliente con cada una de sus propiedades
 @model()
 export class Cliente extends Entity {
   @property({
@@ -55,6 +56,7 @@ export class Cliente extends Entity {
   })
   rol: string;
 
+//Se crea las diferentes relaciones del moldelo cliente con otros modelos
 
   @hasMany(() => Pedido)
   pedidos: Pedido[];

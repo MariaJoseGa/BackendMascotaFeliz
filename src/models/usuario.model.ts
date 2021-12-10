@@ -1,5 +1,7 @@
 import {Entity, model, property} from '@loopback/repository';
 
+//Se genera el modelo usuario con sus propiedades respectivas
+
 @model()
 export class Usuario extends Entity {
   @property({
@@ -50,7 +52,6 @@ export class Usuario extends Entity {
     required: true,
   })
   permiso: string;
-
 
   constructor(data?: Partial<Usuario>) {
     super(data);

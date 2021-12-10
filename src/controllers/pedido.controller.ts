@@ -27,7 +27,9 @@ export class PedidoController {
     public pedidoRepository : PedidoRepository,
   ) {}
 
+  //Metodo de autenticacion para llamar a la estrategia de administrador
   @authenticate("admin")
+
   @post('/pedidos')
   @response(200, {
     description: 'Pedido model instance',

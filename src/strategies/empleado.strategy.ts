@@ -5,6 +5,7 @@ import {UserProfile} from '@loopback/security';
 import parseBearerToken from 'parse-bearer-token';
 import {AutenticacionService} from '../services';
 
+//Codigo para la implementacion de estrategia de usuario-Empleado
 export class EstrategiaEmpleado implements AuthenticationStrategy {
   name: string = 'empleado';
 

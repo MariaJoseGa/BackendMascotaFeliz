@@ -2,6 +2,8 @@ import {Entity, model, property, belongsTo} from '@loopback/repository';
 import {Mascota} from './mascota.model';
 import {Proveedor} from './proveedor.model';
 
+//Se genera el modelo consulta-veterinaria con sus respectivas propiedades
+
 @model()
 export class ConsultaVeterinaria extends Entity {
   @property({
@@ -35,6 +37,8 @@ export class ConsultaVeterinaria extends Entity {
   })
   observaciones: string;
 
+  //Se crea las diferentes relaciones del moldelo consulta-veterinaria con otros modelos
+  
   @belongsTo(() => Mascota)
   mascotaId: string;
 

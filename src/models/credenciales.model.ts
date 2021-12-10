@@ -1,5 +1,6 @@
 import {Model, model, property} from '@loopback/repository';
 
+//Se genera el modelo credenciales con las propiedades de usuario y clave
 @model()
 export class Credenciales extends Model {
   @property({

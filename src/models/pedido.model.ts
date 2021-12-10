@@ -2,6 +2,8 @@ import {Entity, model, property, belongsTo, hasMany} from '@loopback/repository'
 import {Cliente} from './cliente.model';
 import {DetallePedido} from './detalle-pedido.model';
 
+//Se genera el modelo pedido y sus respectivas propiedades
+
 @model()
 export class Pedido extends Entity {
   @property({
@@ -41,6 +43,7 @@ export class Pedido extends Entity {
   })
   observaciones: string;
 
+  //Se crea las diferentes relaciones del moldelo pedido con otros modelos
   @belongsTo(() => Cliente)
   clienteId: string;
 

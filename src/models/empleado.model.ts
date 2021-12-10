@@ -1,6 +1,7 @@
 import {Entity, hasMany, model, property} from '@loopback/repository';
 import {Mascota} from './mascota.model';
 
+//Se genera el modelo empleado y sus respectivas propiedades
 @model()
 export class Empleado extends Entity {
   @property({
@@ -54,6 +55,8 @@ export class Empleado extends Entity {
   })
   tipo: string;
 
+  //Se crea las diferentes relaciones del moldelo empleado con otros modelos
+  //Solo se tiene una relacion que es de uno a muchos
   @hasMany(() => Mascota)
   mascotas: Mascota[];
 

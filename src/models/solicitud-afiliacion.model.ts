@@ -2,6 +2,8 @@ import {Entity, model, property, belongsTo} from '@loopback/repository';
 import {Mascota} from './mascota.model';
 import {Cliente} from './cliente.model';
 
+//Se genera el modelo solicitud-afiliacion y sus respectivas propiedades
+
 @model()
 export class SolicitudAfiliacion extends Entity {
   @property({
@@ -29,6 +31,7 @@ export class SolicitudAfiliacion extends Entity {
   })
   id?: string;
 
+   //Se crea las diferentes relaciones del moldelo solicitud-afiliacion con otros modelos
   @belongsTo(() => Mascota)
   mascotaId: string;
 

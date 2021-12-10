@@ -1,6 +1,8 @@
 import {Entity, model, property, hasMany} from '@loopback/repository';
 import {PagoPlanes} from './pago-planes.model';
 
+//Se genera el modelo plan con sus respectivas propiedades
+
 @model()
 export class Plan extends Entity {
   @property({
@@ -28,6 +30,7 @@ export class Plan extends Entity {
   })
   precio: number;
 
+ //Se crea las diferentes relaciones del moldelo plan con otros modelos
   @hasMany(() => PagoPlanes)
   pagoPlanes: PagoPlanes[];
 

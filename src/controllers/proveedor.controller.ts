@@ -27,7 +27,10 @@ export class ProveedorController {
     public proveedorRepository : ProveedorRepository,
   ) {}
 
+  //Metodo de autenticacion para llamar a la estrategia de empleado
   @authenticate("empleado")
+
+  
   @post('/proveedors')
   @response(200, {
     description: 'Proveedor model instance',

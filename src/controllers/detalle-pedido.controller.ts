@@ -27,7 +27,10 @@ export class DetallePedidoController {
     public detallePedidoRepository : DetallePedidoRepository,
   ) {}
 
+ //Metodo de autenticacion para llamar a la estrategia de empleado
   @authenticate("empleado")
+
+  
   @post('/detalle-pedidos')
   @response(200, {
     description: 'DetallePedido model instance',

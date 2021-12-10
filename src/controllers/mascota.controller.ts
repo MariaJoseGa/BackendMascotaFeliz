@@ -21,7 +21,10 @@ export class MascotaController {
     public mascotaRepository: MascotaRepository,
   ) { }
 
+  //Metodo de autenticacion para llamar a la estrategia de administrador
   @authenticate("admin")
+
+  
   @post('/mascotas')
   @response(200, {
     description: 'Mascota model instance',

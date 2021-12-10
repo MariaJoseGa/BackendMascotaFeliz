@@ -27,7 +27,10 @@ export class PlanController {
     public planRepository : PlanRepository,
   ) {}
 
+ //Metodo de autenticacion para llamar a la estrategia de empleado
   @authenticate("empleado")
+
+  
   @post('/planes')
   @response(200, {
     description: 'Plan model instance',
