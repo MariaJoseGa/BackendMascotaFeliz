@@ -5,12 +5,18 @@ import {
   Filter,
   FilterExcludingWhere,
   repository,
-  Where
+  Where,
 } from '@loopback/repository';
 import {
-  del, get,
-  getModelSchemaRef, param, patch, post, put, requestBody,
-  response
+  post,
+  param,
+  get,
+  getModelSchemaRef,
+  patch,
+  put,
+  del,
+  requestBody,
+  response,
 } from '@loopback/rest';
 import {Usuario} from '../models';
 import {UsuarioRepository} from '../repositories';
@@ -24,7 +30,7 @@ export class UsuarioController {
     //Importacion del servicio de autenticacion
     @service(AutenticacionService)
     public servicioAutenticacion: AutenticacionService
-  ) { }
+  ) {}
 
   @post('/usuarios')
   @response(200, {
@@ -55,9 +61,9 @@ export class UsuarioController {
     let asunto = '¡Registro en MASCOTA FELIZ exitoso!';
     let contenido = `Hola ${usuario.nombre}, su usario es ${usuario.email} y su contraseña es ${clave}`;
     fetch(`http://127.0.0.1:5000/envio-correo?correo-destino=${destino}&asunto=${asunto}&contenido=${contenido}`)
-      .then((data: any) => {
-        console.log(data);
-      })
+    .then((data:any)=>{
+      console.log(data);
+    })
     return u;
   }
 

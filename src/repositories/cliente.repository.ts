@@ -1,9 +1,9 @@
-import {Getter, inject} from '@loopback/core';
-import {DefaultCrudRepository, HasManyRepositoryFactory, repository} from '@loopback/repository';
+import {inject, Getter} from '@loopback/core';
+import {DefaultCrudRepository, repository, HasManyRepositoryFactory} from '@loopback/repository';
 import {MongoDbDataSource} from '../datasources';
-import {Cliente, ClienteRelations, Mascota, Pedido, SolicitudAfiliacion} from '../models';
-import {MascotaRepository} from './mascota.repository';
+import {Cliente, ClienteRelations, Pedido, Mascota, SolicitudAfiliacion} from '../models';
 import {PedidoRepository} from './pedido.repository';
+import {MascotaRepository} from './mascota.repository';
 import {SolicitudAfiliacionRepository} from './solicitud-afiliacion.repository';
 
 export class ClienteRepository extends DefaultCrudRepository<
