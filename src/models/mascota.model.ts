@@ -49,6 +49,12 @@ export class Mascota extends Entity {
     type: 'string',
     required: true,
   })
+  ciudad: string;
+
+  @property({
+    type: 'string',
+    required: true,
+  })
   fechaNacimiento: string;
 
   @property({

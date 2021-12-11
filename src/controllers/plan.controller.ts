@@ -30,7 +30,7 @@ export class PlanController {
  //Metodo de autenticacion para llamar a la estrategia de empleado
   @authenticate("empleado")
 
-  
+
   @post('/planes')
   @response(200, {
     description: 'Plan model instance',
@@ -63,6 +63,7 @@ export class PlanController {
     return this.planRepository.count(where);
   }
 
+  @authenticate.skip()
   @get('/planes')
   @response(200, {
     description: 'Array of Plan model instances',

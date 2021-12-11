@@ -25,6 +25,12 @@ export class Plan extends Entity {
   descripcion: string;
 
   @property({
+    type: 'string',
+    required: true,
+  })
+  ciudad: string;
+
+  @property({
     type: 'number',
     required: true,
   })
