@@ -62,14 +62,13 @@ npm run lint:fix
 - `npm run docker:build`: Build a Docker image for this application
 - `npm run docker:run`: Run this application inside a Docker container
 
-## Tests
 
-```sh
-npm test
-```
+## Information
 
-This project was builded with ❤ by InMotion, All rights reserved.
-Builded for Mision TIC 2022 Web Development project
+- This project was builded with ❤ by InMotion, All rights reserved.
+- Developed for Mision TIC 2022 Web Development project.
+- This repository contains only the backend and logical part of the application, for the Frontend go to [this repository](https://github.com/Steven-Leon-007/FrontendMascotaFeliz).
 
+#
 
 [![LoopBack](https://github.com/loopbackio/loopback-next/raw/master/docs/site/imgs/branding/Powered-by-LoopBack-Badge-(blue)-@2x.png)](http://loopback.io/)
