@@ -5,18 +5,12 @@ import {
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
-  put,
-  del,
-  requestBody,
-  response,
+  del, get,
+  getModelSchemaRef, param, patch, post, put, requestBody,
+  response
 } from '@loopback/rest';
 import {Plan} from '../models';
 import {PlanRepository} from '../repositories';
@@ -24,13 +18,11 @@ import {PlanRepository} from '../repositories';
 export class PlanController {
   constructor(
     @repository(PlanRepository)
-    public planRepository : PlanRepository,
-  ) {}
+    public planRepository: PlanRepository,
+  ) { }
 
- //Metodo de autenticacion para llamar a la estrategia de empleado
+  //Metodo de autenticacion para llamar a la estrategia de empleado
   @authenticate("empleado")
-
-
   @post('/planes')
   @response(200, {
     description: 'Plan model instance',
